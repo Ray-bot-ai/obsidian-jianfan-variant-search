@@ -1,0 +1,9 @@
+{
+  "id": "jianfan-variant-search",
+  "name": "简繁异体通搜",
+  "version": "1.0.0",
+  "minAppVersion": "1.4.0",
+  "description": "把简体、繁体、异体字、日本新旧字体视为等价进行全库全文检索。字形对照数据来自 cjkvi-tables。",
+  "author": "yangrui",
+  "isDesktopOnly": false
+}

@@ -1,0 +1,32 @@
+# 简繁异体通搜 (jianfan-variant-search)
+
+把简体 / 繁体 / 异体字 / 日本新旧字体视为等价，对全库做全文检索。
+原生 Obsidian 搜索不支持简繁异体通搜，本插件提供一个侧栏检索面板补足。
+
+## 用法
+- 点左侧栏「放大镜」图标，或命令面板搜「简繁异体通搜」打开右侧检索面板。
+- 输入要搜的词（用简体、繁体随意），空格分隔多个词表示「且」。
+- 命中结果按文件分组，点标题或摘要跳转到原文位置。
+- 还有命令「用选中文字进行简繁异体通搜」。
+- 设置里可开关是否同时搜 `.txt`、调摘要长度与显示上限。
+
+## 原理
+检索时把每个汉字展开成它所在的「等价字组」字符集，例如 `国` → 正则 `[国國]`，
+`陈诚` → `[陈陳][诚誠]`，于是简体输入也能命中繁体/异体原文。
+
+## 字形数据来源：cjkvi-tables
+`variants.json` 由 `build_variants.py` 解析以下 4 张表合并（并查集求等价闭包）生成：
+- `zibiao2009-5.txt` 简繁汉字对照表（《通用规范汉字表》配套）
+- `zongbiao1986.txt` 简化字总表
+- `yyb1995.txt` 第一批异体字整理表
+- `joyo2010.txt` 日本新旧字体（常用漢字表 新字体↔旧字体）
+
+覆盖约 6900 字头、3100 余组，最大组 8 字（无病态过度合并）。
+
+### 重新生成 variants.json
+```bash
+git clone --depth 1 https://github.com/cjkvi/cjkvi-tables.git
+python3 build_variants.py cjkvi-tables variants.json
+```
+如需更全的异体覆盖，可改用 cjkvi/cjkvi-variants（清洁的 U+xxxx 关系表），
+在 build_variants.py 里增加对应解析分支即可。
