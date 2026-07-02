@@ -30,3 +30,10 @@ python3 build_variants.py cjkvi-tables variants.json
 ```
 如需更全的异体覆盖，可改用 cjkvi/cjkvi-variants（清洁的 U+xxxx 关系表），
 在 build_variants.py 里增加对应解析分支即可。
+
+## 许可
+- **代码**：MIT（见 [LICENSE](LICENSE)）。
+- **数据**（`variants.json`）：由上述四张**官方规范字表**解析生成。官方规范性文件在其法域
+  一般不受著作权保护（中国《著作权法》第五条、日本《著作権法》第十三条排除法律法规与官方告示等），
+  字形等价关系属客观事实数据。cjkvi-tables 未设许可，即因其仅为这些官方表格的 txt 转录。
+  （本说明非法律意见。）
